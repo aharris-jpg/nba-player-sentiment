@@ -13,7 +13,6 @@
   --text:#e9f4f1;
   --muted:rgba(233,244,241,0.65);
 
-  /* POLARIZING THEME */
   --accent:#c86bff;
   --accent-2:#ff73c6;
   --gold:#ffcc33;
@@ -153,9 +152,38 @@ tbody tr:hover .player{
   color:var(--muted);
 }
 
+.brand{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:16px;
+  margin-top:14px;
+  flex-wrap:wrap;
+}
+
+.source{
+  font-size:12px;
+  color:var(--muted);
+}
+
+.source a{
+  color:var(--accent);
+  text-decoration:none;
+  border-bottom:1px dotted rgba(200,107,255,0.55);
+  font-weight:900;
+}
+
+.brand img{
+  height:60px;
+  width:auto;
+  filter:drop-shadow(0 14px 26px rgba(0,0,0,0.55));
+  opacity:0.96;
+}
+
 @media (max-width:600px){
   h1{font-size:28px}
   td,th{padding:12px}
+  .brand img{height:50px}
 }
 </style>
 </head>
@@ -259,8 +287,16 @@ tbody tr:hover .player{
   </div>
 
   <div class="note">
-    Polarizing Score is a combined sentiment index based on strong positive and negative fan reaction, normalized on a 0–10 scale (10.0 = most polarizing player in the dataset).<br />
-    Source: Reddit discussions analyzed by Rotogrinders.
+    Polarizing Score is a combined sentiment index based on strong positive and negative fan reaction, normalized on a 0–10 scale (10.0 = most polarizing player in the dataset).
+  </div>
+
+  <div class="brand">
+    <div class="source">
+      Source: <a href="https://rotogrinders.com/" target="_blank" rel="noopener">rotogrinders.com</a>
+      &nbsp;·&nbsp; Data: Reddit comments
+    </div>
+
+    <img src="https://i.postimg.cc/CK9H1cBH/download.png" alt="Rotogrinders" />
   </div>
 </div>
 </body>

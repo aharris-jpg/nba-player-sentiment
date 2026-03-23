@@ -85,7 +85,6 @@ tbody tr{
     transform 0.18s ease;
 }
 
-/* Top row emphasis */
 tbody tr:first-child{
   background:linear-gradient(
     90deg,
@@ -94,7 +93,6 @@ tbody tr:first-child{
   );
 }
 
-/* Hover */
 tbody tr:hover{
   background:linear-gradient(
     90deg,
@@ -150,9 +148,38 @@ tbody tr:hover .player{
   color:var(--muted);
 }
 
+.brand{
+  display:flex;
+  justify-content:space-between;
+  align-items:flex-end;
+  gap:16px;
+  margin-top:14px;
+  flex-wrap:wrap;
+}
+
+.source{
+  font-size:12px;
+  color:var(--muted);
+}
+
+.source a{
+  color:var(--accent);
+  text-decoration:none;
+  border-bottom:1px dotted rgba(66,245,197,0.55);
+  font-weight:900;
+}
+
+.brand img{
+  height:60px;
+  width:auto;
+  filter:drop-shadow(0 14px 26px rgba(0,0,0,0.55));
+  opacity:0.96;
+}
+
 @media (max-width:600px){
   h1{font-size:28px}
   td,th{padding:12px}
+  .brand img{height:50px}
 }
 </style>
 </head>
@@ -256,8 +283,16 @@ tbody tr:hover .player{
   </div>
 
   <div class="note">
-    Love Score is a volume-weighted sentiment index normalized on a 0–10 scale (10.0 = strongest positive fan reaction in the dataset).<br />
-    Source: Reddit discussions analyzed by Rotogrinders.
+    Love Score is a volume-weighted sentiment index normalized on a 0–10 scale (10.0 = strongest positive fan reaction in the dataset).
+  </div>
+
+  <div class="brand">
+    <div class="source">
+      Source: <a href="https://rotogrinders.com/" target="_blank" rel="noopener">rotogrinders.com</a>
+      &nbsp;·&nbsp; Data: Reddit comments
+    </div>
+
+    <img src="https://i.postimg.cc/CK9H1cBH/download.png" alt="Rotogrinders" />
   </div>
 </div>
 </body>

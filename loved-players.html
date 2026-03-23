@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<title>NBA's Most Loved Players</title>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+
+<style>
+:root {
+  --bg-dark: #05060c;
+  --card-radius: 16px;
+  --text-main: #e9f4f1;
+  --accent: #42f5c5;
+  --gold: #ffcc33;
+
+  --panel: rgba(255,255,255,0.04);
+  --panel-border: rgba(255,255,255,0.08);
+  --shadow: 0 26px 70px rgba(0,0,0,0.55);
+}
+
+* { box-sizing: border-box; }
+body {
+  margin: 0;
+  background:
+    radial-gradient(1200px 600px at 70% -200px, rgba(16,63,58,0.90) 0%, transparent 60%),
+    radial-gradient(900px 520px at 10% 0%, rgba(11,26,58,0.90) 0%, transparent 55%),
+    radial-gradient(900px 560px at 85% 30%, rgba(66,245,197,0.12) 0%, transparent 55%),
+    var(--bg-dark);
+  color: var(--text-main);
+  font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+/* subtle stars + grain */
+body:before{
+  content:"";
+  position:fixed; inset:0;
+  pointer-events:none;
+  background:
+    radial-gradient(2px 2px at 12% 18%, rgba(255,255,255,0.60) 50%, transparent 52%),
+    radial-gradient(2px 2px at 68% 12%, rgba(255,255,255,0.42) 50%, transparent 52%),
+    radial-gradient(1.5px 1.5px at 44% 26%, rgba(255,255,255,0.42) 50%, transparent 52%),
+    radial-gradient(1.6px 1.6px at 84% 36%, rgba(255,255,255,0.34) 50%, transparent 52%),
+    radial-gradient(1.4px 1.4px at 18% 42%, rgba(255,255,255,0.34) 50%, transparent 52%),
+    radial-gradient(2px 2px at 30% 70%, rgba(255,255,255,0.28) 50%, transparent 52%),
+    radial-gradient(1.4px 1.4px at 76% 74%, rgba(255,255,255,0.28) 50%, transparent 52%),
+    radial-gradient(1.6px 1.6px at 55% 88%, rgba(255,255,255,0.30) 50%, transparent 52%);
+  opacity:0.28;
+  mix-blend-mode:screen;
+}
+body:after{
+  content:"";
+  position:fixed; inset:0;
+  pointer-events:none;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='180' height='180' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E");
+  opacity:.16;
+  mix-blend-mode:overlay;
+}
+
+.wrapper {
+  max-width: 1100px;
+  margin: 42px auto 60px;
+  padding: 0 22px;
+}
+
+h1 {
+  text-align: center;
+  font-size: clamp(28px, 4vw, 44px);
+  letter-spacing: 1px;
+  margin: 0 0 22px;
+  font-weight: 900;
+}
+h1 span { color: var(--accent); }
+
+.grid {
+  background: var(--panel);
+  border: 1px solid var(--panel-border);
+  border-radius: 24px;
+  padding: clamp(12px, 2vw, 18px);
+  backdrop-filter: blur(10px);
+  box-shadow: var(--shadow);
+  position: relative;
+  overflow: hidden;
+}
+.grid:before{
+  content:"";
+  position:absolute; inset:-40px;
+  background:
+    radial-gradient(520px 260px at 22% 18%, rgba(66,245,197,0.16), transparent 62%),
+    radial-gradient(520px 280px at 78% 85%, rgba(255,255,255,0.06), transparent 64%),
+    radial-gradient(520px 260px at 70% 15%, rgba(11,26,58,0.22), transparent 62%);
+  filter: blur(14px);
+  opacity:0.85;
+  pointer-events:none;
+}
+.grid-inner{ position:relative; z-index:1; }
+
+.row {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: clamp(8px, 1.4vw, 14px);
+  padding: clamp(8px, 1.4vw, 12px);
+  border-radius: 18px;
+  margin-bottom: clamp(10px, 1.6vw, 14px);
+  border: 1px solid rgba(255,255,255,0.08);
+  box-shadow: 0 10px 26px rgba(0,0,0,0.30);
+}
+
+.row-1{
+  background: linear-gradient(90deg, #1CFFC3 0%, #18D9B1 45%, #13B89A 100%);
+  box-shadow:
+    0 0 0 1px rgba(255,255,255,0.18) inset,
+    0 12px 30px rgba(28,255,195,0.10);
+}
+.row-2 { background: linear-gradient(90deg, #1bb4ff, #165c9e); }
+.row-3 { background: linear-gradient(90deg, #174f8a, #0f355f); }
+.row-4 { background: linear-gradient(90deg, #0f2b45, #091c30); }
+.row-5 { background: linear-gradient(90deg, #0b1320, #05080f); }
+
+.card {
+  background: rgba(0,0,0,0.35);
+  border-radius: var(--card-radius);
+  padding: clamp(10px, 1.4vw, 14px) clamp(8px, 1.2vw, 12px) clamp(12px, 1.6vw, 16px);
+  text-align: center;
+  position: relative;
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.06);
+  overflow: hidden;
+}
+.card:before{
+  content:"";
+  position:absolute; inset:0;
+  background:
+    radial-gradient(220px 140px at 30% 20%, rgba(255,255,255,0.12), transparent 60%),
+    radial-gradient(280px 220px at 70% 95%, rgba(0,0,0,0.55), transparent 60%);
+  opacity:0.85;
+  pointer-events:none;
+}
+
+.card.rank-1 {
+  box-shadow:
+    0 0 0 2px rgba(255,204,51,0.85),
+    0 0 28px rgba(255,204,51,0.24),
+    inset 0 0 0 1px rgba(255,255,255,0.08);
+}
+
+.rank {
+  position: absolute;
+  top: clamp(6px, 1vw, 10px);
+  right: clamp(6px, 1vw, 10px);
+  z-index: 2;
+  background: rgba(0,0,0,0.55);
+  padding: 3px 7px;
+  border-radius: 10px;
+  font-size: clamp(10px, 1.2vw, 12px);
+  font-weight: 800;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.avatar {
+  width: clamp(52px, 8.5vw, 92px);
+  height: clamp(52px, 8.5vw, 92px);
+  margin: 0 auto clamp(6px, 1vw, 10px);
+  border-radius: 50%;
+  position: relative;
+  overflow: hidden;
+  z-index: 2;
+  box-shadow:
+    0 0 0 3px rgba(255,255,255,0.12),
+    0 10px 18px rgba(0,0,0,0.35);
+  background: rgba(0,0,0,0.25);
+}
+.avatar img{
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display:block;
+  transform: scale(1.03);
+}
+.avatar::before{
+  content:"";
+  position:absolute;
+  inset:-10px;
+  border-radius:50%;
+  background: radial-gradient(circle at 50% 45%,
+    rgba(66,245,197,0.22) 0%,
+    rgba(66,245,197,0.10) 38%,
+    transparent 70%);
+  filter: blur(6px);
+  opacity: 0.75;
+  pointer-events:none;
+}
+.avatar::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  border-radius:50%;
+  background: radial-gradient(circle at 50% 35%,
+    rgba(255,255,255,0.06) 0%,
+    rgba(0,0,0,0.22) 68%,
+    rgba(0,0,0,0.38) 100%);
+  pointer-events:none;
+}
+
+.name {
+  position: relative;
+  z-index: 2;
+  font-size: clamp(11px, 1.25vw, 14px);
+  font-weight: 800;
+  margin: 0 0 4px;
+  line-height: 1.15;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.team {
+  position: relative;
+  z-index: 2;
+  font-size: clamp(9px, 1.05vw, 11px);
+  letter-spacing: 0.9px;
+  text-transform: uppercase;
+  color: rgba(233,244,241,0.72);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.footer {
+  margin-top: 16px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255,255,255,0.15);
+}
+
+.scale {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: rgba(233,244,241,0.85);
+}
+.scale span:first-child{ color: rgba(66,245,197,0.95); }
+.scale span:last-child{ color: rgba(233,244,241,0.78); }
+
+.bar {
+  flex: 1;
+  height: 8px;
+  border-radius: 7px;
+  background: linear-gradient(90deg, #1cffc3, #1bb4ff, #0f355f, #05080f);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,0.12);
+}
+
+.scale-sub{
+  margin-top:6px;
+  font-size:11px;
+  color:rgba(233,244,241,0.70);
+  letter-spacing:0.02em;
+}
+
+.meta {
+  font-size: 12px;
+  line-height: 1.45;
+  color: rgba(233,244,241,0.78);
+  margin-top: 10px;
+  max-width: 980px;
+}
+.meta b{ color: rgba(233,244,241,0.92); }
+
+.brand {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.source {
+  font-size: 12px;
+  color: rgba(233,244,241,0.72);
+}
+.source a{
+  color: rgba(66,245,197,0.95);
+  text-decoration: none;
+  border-bottom: 1px dotted rgba(66,245,197,0.55);
+  font-weight: 900;
+}
+
+.brand-mark{
+  font-size: 18px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+  color: rgba(233,244,241,0.92);
+  text-transform: uppercase;
+}
+
+@media (max-width:420px){
+  .wrapper{ padding:0 14px; }
+  .grid{ border-radius:18px; }
+  .row{ border-radius:16px; }
+  .card{ border-radius:14px; }
+}
+</style>
+</head>
+
+<body>
+  <div class="wrapper">
+    <h1>NBA’S MOST LOVED <span>PLAYERS</span></h1>
+
+    <div class="grid">
+      <div class="grid-inner" id="grid"></div>
+
+      <div class="footer">
+        <div class="scale" aria-label="Love scale">
+          <span>MORE LOVE</span>
+          <div class="bar" aria-hidden="true"></div>
+          <span>LESS LOVE</span>
+        </div>
+        <div class="scale-sub">Based on positive fan sentiment</div>
+
+        <div class="meta">
+          <b>How this ranking was built:</b> We analyzed Reddit comments mentioning each player by full name, classified sentiment
+          (<b>positive / neutral / negative</b>) using VADER, then ranked players by <b>how consistently they’re praised</b> — with a boost for discussion volume.
+        </div>
+
+        <div class="brand">
+          <div class="source">
+            Source: <a href="https://rotogrinders.com/" target="_blank" rel="noopener">rotogrinders.com</a>
+            &nbsp;·&nbsp; Data: Reddit comments &nbsp;·&nbsp; Headshots: NBA player image URLs
+          </div>
+
+          <div class="brand-mark">ROTOGRINDERS</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+<script>
+const PLAYERS = [
+  { rank:1,  team:"MILWAUKEE BUCKS",        name:"Giannis Antetokounmpo",      nbaId:203507 },
+  { rank:2,  team:"LOS ANGELES LAKERS",     name:"Luka Dončić",                nbaId:1629029 },
+  { rank:3,  team:"LOS ANGELES LAKERS",     name:"LeBron James",               nbaId:2544 },
+  { rank:4,  team:"GOLDEN STATE WARRIORS",  name:"Stephen Curry",              nbaId:201939 },
+  { rank:5,  team:"SAN ANTONIO SPURS",      name:"Victor Wembanyama",          nbaId:1641705 },
+
+  { rank:6,  team:"HOUSTON ROCKETS",        name:"Kevin Durant",               nbaId:201142 },
+  { rank:7,  team:"BOSTON CELTICS",         name:"Jayson Tatum",               nbaId:1628369 },
+  { rank:8,  team:"WASHINGTON WIZARDS",     name:"Trae Young",                 nbaId:1629027 },
+  { rank:9,  team:"DALLAS MAVERICKS",       name:"Kyrie Irving",               nbaId:202681 },
+  { rank:10, team:"DENVER NUGGETS",         name:"Nikola Jokić",               nbaId:203999 },
+
+  { rank:11, team:"PORTLAND TRAIL BLAZERS", name:"Jrue Holiday",               nbaId:201950 },
+  { rank:12, team:"CLEVELAND CAVALIERS",    name:"James Harden",               nbaId:201935 },
+  { rank:13, team:"PHILADELPHIA 76ERS",     name:"Joel Embiid",                nbaId:203954 },
+  { rank:14, team:"GOLDEN STATE WARRIORS",  name:"Jimmy Butler",               nbaId:202710 },
+  { rank:15, team:"OKLAHOMA CITY THUNDER",  name:"Shai Gilgeous-Alexander",    nbaId:1628983 },
+
+  { rank:16, team:"MEMPHIS GRIZZLIES",      name:"Ja Morant",                  nbaId:1629630 },
+  { rank:17, team:"INDIANA PACERS",         name:"Tyrese Haliburton",          nbaId:1630169 },
+  { rank:18, team:"LOS ANGELES CLIPPERS",   name:"Kawhi Leonard",              nbaId:202695 },
+  { rank:19, team:"PORTLAND TRAIL BLAZERS", name:"Damian Lillard",             nbaId:203081 },
+  { rank:20, team:"CHARLOTTE HORNETS",      name:"LaMelo Ball",                nbaId:1630163 },
+
+  { rank:21, team:"DALLAS MAVERICKS",       name:"Klay Thompson",              nbaId:202691 },
+  { rank:22, team:"SACRAMENTO KINGS",       name:"DeMar DeRozan",              nbaId:201942 },
+  { rank:23, team:"PHOENIX SUNS",           name:"Devin Booker",               nbaId:1626164 },
+  { rank:24, team:"GOLDEN STATE WARRIORS",  name:"Draymond Green",             nbaId:203110 },
+  { rank:25, team:"CLEVELAND CAVALIERS",    name:"Donovan Mitchell",           nbaId:1628378 }
+];
+
+const FALLBACK =
+  `data:image/svg+xml;utf8,` +
+  encodeURIComponent(`
+    <svg xmlns="http://www.w3.org/2000/svg" width="200" height="200">
+      <defs>
+        <linearGradient id="g" x1="0" x2="0" y1="0" y2="1">
+          <stop stop-color="rgba(255,255,255,0.22)" offset="0"/>
+          <stop stop-color="rgba(255,255,255,0.06)" offset="1"/>
+        </linearGradient>
+      </defs>
+      <rect width="200" height="200" fill="rgba(0,0,0,0.22)"/>
+      <circle cx="100" cy="84" r="34" fill="url(#g)"/>
+      <path d="M30,190c8-42,36-64,70-64s62,22,70,64" fill="url(#g)"/>
+    </svg>
+`);
+
+function headshotUrl(id){
+  return `https://ak-static.cms.nba.com/wp-content/uploads/headshots/nba/latest/260x190/${id}.png`;
+}
+function headshotAltUrl(id){
+  return `https://cdn.nba.com/headshots/nba/latest/1040x760/${id}.png`;
+}
+
+function marketFromTeam(team){
+  const t = String(team || "").toUpperCase().replace(/\s+/g," ").trim();
+  const MAP = {
+    "ATLANTA HAWKS":"ATLANTA",
+    "BOSTON CELTICS":"BOSTON",
+    "BROOKLYN NETS":"BROOKLYN",
+    "CHARLOTTE HORNETS":"CHARLOTTE",
+    "CHICAGO BULLS":"CHICAGO",
+    "CLEVELAND CAVALIERS":"CLEVELAND",
+    "DALLAS MAVERICKS":"DALLAS",
+    "DENVER NUGGETS":"DENVER",
+    "DETROIT PISTONS":"DETROIT",
+    "GOLDEN STATE WARRIORS":"GOLDEN STATE",
+    "HOUSTON ROCKETS":"HOUSTON",
+    "INDIANA PACERS":"INDIANA",
+    "LOS ANGELES CLIPPERS":"LA CLIPPERS",
+    "LOS ANGELES LAKERS":"LA LAKERS",
+    "MEMPHIS GRIZZLIES":"MEMPHIS",
+    "MIAMI HEAT":"MIAMI",
+    "MILWAUKEE BUCKS":"MILWAUKEE",
+    "MINNESOTA TIMBERWOLVES":"MINNESOTA",
+    "NEW ORLEANS PELICANS":"NEW ORLEANS",
+    "NEW YORK KNICKS":"NY KNICKS",
+    "OKLAHOMA CITY THUNDER":"OKC",
+    "ORLANDO MAGIC":"ORLANDO",
+    "PHILADELPHIA 76ERS":"PHILADELPHIA",
+    "PHOENIX SUNS":"PHOENIX",
+    "PORTLAND TRAIL BLAZERS":"PORTLAND",
+    "SACRAMENTO KINGS":"SACRAMENTO",
+    "SAN ANTONIO SPURS":"SAN ANTONIO",
+    "TORONTO RAPTORS":"TORONTO",
+    "UTAH JAZZ":"UTAH",
+    "WASHINGTON WIZARDS":"WASHINGTON"
+  };
+  return MAP[t] || t;
+}
+
+function rowClassForRank(rank){
+  if(rank <= 5) return "row-1";
+  if(rank <= 10) return "row-2";
+  if(rank <= 15) return "row-3";
+  if(rank <= 20) return "row-4";
+  return "row-5";
+}
+
+function render(){
+  const grid = document.getElementById("grid");
+  grid.innerHTML = "";
+
+  for(let r = 0; r < 5; r++){
+    const row = document.createElement("div");
+    row.className = `row ${rowClassForRank(r*5 + 1)}`;
+
+    const slice = PLAYERS.slice(r*5, r*5 + 5);
+    for(const p of slice){
+      const card = document.createElement("div");
+      card.className = `card ${p.rank === 1 ? "rank-1" : ""}`;
+
+      const badge = document.createElement("div");
+      badge.className = "rank";
+      badge.textContent = `#${p.rank}`;
+
+      const avatar = document.createElement("div");
+      avatar.className = "avatar";
+
+      const img = document.createElement("img");
+      img.alt = `${p.name} headshot`;
+      img.src = headshotUrl(p.nbaId);
+      img.onerror = () => {
+        if (img.src !== headshotAltUrl(p.nbaId)) img.src = headshotAltUrl(p.nbaId);
+        else img.src = FALLBACK;
+      };
+      avatar.appendChild(img);
+
+      const name = document.createElement("div");
+      name.className = "name";
+      name.textContent = p.name;
+
+      const team = document.createElement("div");
+      team.className = "team";
+      team.textContent = marketFromTeam(p.team);
+
+      card.appendChild(badge);
+      card.appendChild(avatar);
+      card.appendChild(name);
+      card.appendChild(team);
+
+      row.appendChild(card);
+    }
+
+    grid.appendChild(row);
+  }
+}
+
+render();
+</script>
+</body>
+</html>

@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+<title>NBA Playoff Sentiment Index 2026</title>
+
+<style>
+:root {
+  --bg: #eef2f7;
+  --card: #ffffff;
+  --navy: #0f2747;
+  --navy2: #1d4178;
+  --red: #c9272e;
+  --gold: #d6ab2f;
+  --green: #138a5b;
+  --orange: #d97706;
+  --line: #dbe3ee;
+  --text: #12233f;
+  --muted: #6c7a8f;
+}
+
+body {
+  margin: 0;
+  padding: 30px;
+  background: var(--bg);
+  font-family: Arial, sans-serif;
+}
+
+.wrap {
+  max-width: 760px;
+  margin: auto;
+}
+
+.card {
+  background: var(--card);
+  border-radius: 22px;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  box-shadow: 0 18px 40px rgba(10, 30, 60, 0.08);
+}
+
+.header {
+  padding: 18px;
+  background: linear-gradient(90deg, var(--navy), var(--navy2), var(--red));
+  color: #fff;
+}
+
+.eyebrow {
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.title {
+  font-size: 20px;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.sub {
+  margin-top: 6px;
+  font-size: 12px;
+  line-height: 1.35;
+  color: rgba(255,255,255,0.9);
+  max-width: 620px;
+}
+
+.section {
+  padding: 12px;
+  background: linear-gradient(180deg, #fbfcfe, #f3f7fb);
+  border-top: 1px solid var(--line);
+}
+
+.section-title {
+  font-size: 12px;
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+
+.loved { color: var(--green); }
+.hated { color: var(--orange); }
+
+.row {
+  display: grid;
+  grid-template-columns: 34px 46px 1fr auto;
+  gap: 12px;
+  align-items: center;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 12px 14px;
+  margin-bottom: 8px;
+}
+
+.rank {
+  width: 30px;
+  height: 30px;
+  border-radius: 999px;
+  display: grid;
+  place-items: center;
+  font-size: 12px;
+  font-weight: 800;
+  background: var(--navy);
+  color: #fff;
+}
+
+.top3 .rank {
+  background: var(--gold);
+  color: #12233f;
+}
+
+.logo {
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  border: 1px solid var(--line);
+  display: grid;
+  place-items: center;
+  background: #fff;
+}
+
+.logo img {
+  width: 28px;
+  height: 28px;
+  object-fit: contain;
+}
+
+.player {
+  font-size: 16px;
+  font-weight: 900;
+  color: var(--text);
+}
+
+.meta {
+  font-size: 12px;
+  color: var(--muted);
+  margin-top: 3px;
+}
+
+.score {
+  text-align: right;
+}
+
+.percent {
+  font-size: 20px;
+  font-weight: 900;
+}
+
+.top3 .percent {
+  color: var(--gold);
+}
+
+.odds {
+  font-size: 11px;
+  color: var(--muted);
+  margin-top: 2px;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  background: #f6f8fb;
+  border-top: 1px solid var(--line);
+  font-size: 11px;
+  color: var(--muted);
+}
+
+.footer img {
+  width: 34px;
+}
+
+.footer strong {
+  color: var(--text);
+}
+
+@media (max-width: 640px) {
+  body { padding: 12px; }
+
+  .row {
+    grid-template-columns: 30px 40px 1fr;
+  }
+
+  .score {
+    grid-column: 2 / 4;
+    text-align: left;
+    padding-left: 50px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="wrap">
+<div class="card">
+
+<div class="header">
+  <div class="eyebrow">2026 NBA Playoff Sentiment Index</div>
+  <div class="title">The Most Loved — Most Hated Players Heading Into the 2026 Playoffs</div>
+  <div class="sub">
+    LeBron James, Nikola Jokić and Trae Young appear across both sides of the debate — showing how the NBA’s biggest stars drive the strongest reactions entering the postseason.
+  </div>
+</div>
+
+<!-- MOST LOVED -->
+<div class="section">
+<div class="section-title loved">Most Loved Playoff Players</div>
+
+<div class="row top3">
+<div class="rank">1</div>
+<div class="logo"><img src="https://a.espncdn.com/i/teamlogos/nba/500/lal.png"></div>
+<div><div class="player">LeBron James</div><div class="meta">Los Angeles Lakers • 44,889 mentions • 20,924 positive</div></div>
+<div class="score"><div class="percent">9.85</div><div class="odds">Love Score</div></div>
+</div>
+
+<div class="row top3">
+<div class="rank">2</div>
+<div class="logo"><img src="https://a.espncdn.com/i/teamlogos/nba/500/sa.png"></div>
+<div><div class="player">Victor Wembanyama</div><div class="meta">San Antonio Spurs • 25,921 mentions • 12,028 positive</div></div>
+<div class="score"><div class="percent">9.30</div><div class="odds">Love Score</div></div>
+</div>
+
+<div class="row top3">
+<div class="rank">3</div>
+<div class="logo"><img src="https://a.espncdn.com/i/teamlogos/nba/500/bos.png"></div>
+<div><div class="player">Jayson Tatum</div><div class="meta">Boston Celtics • 17,182 mentions • 8,107 positive</div></div>
+<div class="score"><div class="percent">9.08</div><div class="odds">Love Score</div></div>
+</div>
+
+<div class="row">
+<div class="rank">4</div>
+<div class="logo"><img src="https://a.espncdn.com/i/teamlogos/nba/500/atl.png"></div>
+<div><div class="player">Trae Young</div><div class="meta">Atlanta Hawks • 19,459 mentions • 9,060 positive</div></div>
+<div class="score"><div class="percent">9.07</div><div class="odds">Love Score</div></div>
+</div>
+
+<div class="row">
+<div class="rank">5</div>
+<div class="logo"><img src="https://a.espncdn.com/i/teamlogos/nba/500/den.png"></div>
+<div><div class="player">Nikola Jokić</div><div class="meta">Denver Nuggets • 38,576 mentions • 16,695 positive</div></div>
+<div class="score"><div class="percent">9.02</div><div class="odds">Love Score</div></div>
+</div>
+
+</div>
+
+<!-- MOST HATED -->
+<div class="section">
+<div class="section-title hated">Most Hated Playoff Players</div>
+
+<div class="row top3">
+<div class="rank">1</div>
+<div class="logo"><img src="https://a.espncdn.com/i/teamlogos/nba/500/phi.png"></div>
+<div><div class="player">Joel Embiid</div><div class="meta">Philadelphia 76ers • 18,991 mentions • 5,723 negative</div></div>
+<div class="score"><div class="percent">9.43</div><div class="odds">Hate Score</div></div>
+</div>
+
+<div class="row top3">
+<div class="rank">2</div>
+<div class="logo"><img src="https://a.espncdn.com/i/teamlogos/nba/500/den.png"></div>
+<div><div class="player">Nikola Jokić</div><div class="meta">Denver Nuggets • 38,576 mentions • 10,606 negative</div></div>
+<div class="score"><div class="percent">9.22</div><div class="odds">Hate Score</div></div>
+</div>
+
+<div class="row top3">
+<div class="rank">3</div>
+<div class="logo"><img src="https://a.espncdn.com/i/teamlogos/nba/500/ny.png"></div>
+<div><div class="player">Karl-Anthony Towns</div><div class="meta">New York Knicks • 15,626 mentions • 4,545 negative</div></div>
+<div class="score"><div class="percent">8.92</div><div class="odds">Hate Score</div></div>
+</div>
+
+<div class="row">
+<div class="rank">4</div>
+<div class="logo"><img src="https://a.espncdn.com/i/teamlogos/nba/500/lal.png"></div>
+<div><div class="player">LeBron James</div><div class="meta">Los Angeles Lakers • 44,889 mentions • 11,323 negative</div></div>
+<div class="score"><div class="percent">8.58</div><div class="odds">Hate Score</div></div>
+</div>
+
+<div class="row">
+<div class="rank">5</div>
+<div class="logo"><img src="https://a.espncdn.com/i/teamlogos/nba/500/atl.png"></div>
+<div><div class="player">Trae Young</div><div class="meta">Atlanta Hawks • 19,459 mentions • 5,291 negative</div></div>
+<div class="score"><div class="percent">8.53</div><div class="odds">Hate Score</div></div>
+</div>
+
+</div>
+
+<div class="footer">
+  <img src="https://i.postimg.cc/G2wzjD1p/download.png">
+  <div>
+    <strong>Source: Rotogrinders Reddit Sentiment Study.</strong> Based on analysis across r/NBA and team subreddits. Only players on confirmed 2026 playoff teams are included.
+  </div>
+</div>
+
+</div>
+</div>
+
+</body>
+</html>
